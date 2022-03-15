@@ -1,0 +1,26 @@
+{
+  "name": "proyectofinalbiblioteca",
+  "description": "Creacion con nodejs para creacion de bibilioteca vitual",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/santiagofiquitiva/proyectofinalbiblioteca.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/santiagofiquitiva/proyectofinalbiblioteca/issues"
+  },
+  "homepage": "https://gitlab.com/santiagofiquitiva/proyectofinalbiblioteca#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "nodemon": "^2.0.15",
+    "pg": "^8.7.3"
+  }
+}
