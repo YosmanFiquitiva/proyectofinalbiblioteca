@@ -27,7 +27,7 @@ router.post ('/login', async ( req , res ) =>{
                 code : -1
             });
         }
-
+        
         const userlogued = await loginUser ( correo , password );
 
         if (userlogued) {
@@ -38,7 +38,7 @@ router.post ('/login', async ( req , res ) =>{
                 correo : userlogued.correo,
                 rol : userlogued.id_rol
             }
-
+            
             const token = await generarJwt(payload);
             
             if (userlogued.id_rol === 1) {

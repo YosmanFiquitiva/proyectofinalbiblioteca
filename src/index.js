@@ -5,6 +5,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/',require("./routes/login.routes"));
+app.use (require("./utils/middlewareToken"));
 app.use('/',require("./routes/usuarios.routes"));
 
 app.listen(process.env.PORT,() => {

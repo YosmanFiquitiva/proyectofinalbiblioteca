@@ -1,19 +1,26 @@
 const jwt = require("jsonwebtoken");
 
 const generarJwt = async (payload) =>{
-    
-    const tokenGenerado = jwt.sign(
-        payload,
-        "" + process.env.SECRETPRIVATEKEY,
-        { expiresIn: '5h' }
-    )
+    try {
+        
+        const tokenGenerado = jwt.sign(
+            payload,
+            "" + process.env.SECRETPRIVATEKEY,
+            { expiresIn: '5h' }
+        )  
 
-    return tokenGenerado;
+        return tokenGenerado;
+
+    } catch (error) {
+        
+        throw new Error ( "ERROR AL GENERAR EL TOKEN " )
+    }
+   
 }
 
 //Autorizacion del token enviado
-const verificarJwt = async (token) =>{
-
+const verificarJwt = async ( token ) =>{
+    
     const payload = jwt.verify(token, "" + process.env.SECRETPRIVATEKEY);
 
     return payload;
