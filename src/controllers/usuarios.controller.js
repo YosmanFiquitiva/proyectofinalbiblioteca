@@ -16,10 +16,31 @@ const getAllUsers = async ( ) => {
     }
 }
 
+const getUsersId = async ( id_usuario ) => {
+    try {
+
+        const usuario = await pool.query(`SELECT * FROM usuarios WHERE id_usuario = $1`,[id_usuario]);  
+        if(JSON.stringify(usuario.rows) === '[]') {
+            
+            usuario = null; 
+                                   
+            return usuario;
+
+        }else{
+            
+            return usuario.rows;   
+        }   
+    } catch (error) {
+        
+        throw new error(`OCURRIO UN ERROR GRAVE EN LA BASE DE DATOS ${error}`);
+
+    }
+}
+
 const getUsersRol = async ( id_rol ) => {
     try {
 
-        const usuario = await pool.query(`SELECT * FROM usuarios WHERE id_rol = $1`,[id_rol]);  
+        const usuario = await pool.query(`SELECT * FROM usu_rol WHERE id_rol = $1`,[id_rol]);  
         if(JSON.stringify(usuario.rows) === '[]') {
             
             usuario = null; 
@@ -27,8 +48,9 @@ const getUsersRol = async ( id_rol ) => {
             return usuario;
 
         }else{
-             //const coinciden = await bcrypt.compare( password , usuario.rows[0].password);
-            return usuario.rows;   
+             
+            return usuario.rows; 
+
         }   
     } catch (error) {
         
@@ -48,27 +70,6 @@ const createUser = async ( req ) =>{
     } catch (error) {
         
         throw new error(console.log(`OCURRIO UN ERROR GRAVE EN LA BASE DE DATOS ${error}`));
-
-    }
-}
-
-const getUsersId = async ( id_usuario ) => {
-    try {
-
-        const usuario = await pool.query(`SELECT * FROM usuarios WHERE id_usuario = $1`,[id_usuario]);  
-        if(JSON.stringify(usuario.rows) === '[]') {
-            
-            usuario = null; 
-                                   
-            return usuario;
-
-        }else{
-            
-            return usuario.rows;   
-        }   
-    } catch (error) {
-        
-        throw new error(`OCURRIO UN ERROR GRAVE EN LA BASE DE DATOS ${error}`);
 
     }
 }
