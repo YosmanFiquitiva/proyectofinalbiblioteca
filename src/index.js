@@ -1,12 +1,16 @@
 const express = require("express");
-require ("dotenv").config({path: ".env"});
 const app = express();
+require ("dotenv").config({path: ".env"});
+
 
 app.use(express.json());
 
-app.use('/',require("./routes/login.routes"));
+
+app.use('/login',require("./routes/login.routes"));
 app.use (require("./utils/middlewareToken"));
-app.use('/',require("./routes/usuarios.routes"));
+app.use('/users', require("./routes/usuarios.routes"));
+
+
 
 app.listen(process.env.PORT,() => {
     console.log("EL SERVIDOR SE CONECTO AL PUERTO " + process.env.PORT);

@@ -28,7 +28,7 @@ const getUsersRol = async ( id_rol ) => {
 
         }else{
              //const coinciden = await bcrypt.compare( password , usuario.rows[0].password);
-            return usuario.rows[0];   
+            return usuario.rows;   
         }   
     } catch (error) {
         
@@ -64,7 +64,7 @@ const getUsersId = async ( id_usuario ) => {
 
         }else{
             
-            return usuario.rows[0];   
+            return usuario.rows;   
         }   
     } catch (error) {
         

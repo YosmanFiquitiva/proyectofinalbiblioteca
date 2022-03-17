@@ -3,7 +3,7 @@ const router = express.Router();
 const { loginUser } = require("../controllers/login.controller");
 const { generarJwt } = require("../utils/jwtAuth");
 
-router.post ('/login', async ( req , res ) =>{
+router.post ('/', async ( req , res ) =>{
     try {
         const { correo , password } = req.body;
 

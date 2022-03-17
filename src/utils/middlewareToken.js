@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { verificarJwt } = require("./jwtAuth");
 
-router.use((req, res, next) => {
+router.use(async(req, res, next) => {
     try {
         const authHeader = req.headers.authorization;
         
@@ -13,12 +13,10 @@ router.use((req, res, next) => {
             })
         }
 
-        const token = authHeader.replace("Bearer ", "");
+        const token = authHeader.split(' ').pop();
 
-        const payload = verificarJwt(token);
-
-        console.log(payload);
-
+        const payload = await verificarJwt(token);
+        
         next();
     } catch (error) {
         console.log(error);

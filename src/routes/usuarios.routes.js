@@ -4,7 +4,7 @@ const { getAllUsers , getUsersRol , getUsersId , createUser , updateUser , delet
 
 
 
-router.get("/users" , async ( req , res ) =>{
+router.get("/" , async ( req , res ) =>{
     try {
 
         const usuarios = await getAllUsers();
@@ -17,13 +17,13 @@ router.get("/users" , async ( req , res ) =>{
     } catch (error) {
 
         return res.status(500).json({
-            message : 'No se pudo ingresar el usuario',
+            message : 'NO SE HA PODIDO INGRESAR A LA TABLA DE USUARIOS',
             code: -1
         })
     }
 })
 
-router.get ("/users/rol/:id_rol?", async ( req , res ) => {
+router.get ("/rol/:id_rol?", async ( req , res ) => {
     try {
 
         const id_rol = req.params.id_rol;        
@@ -31,7 +31,7 @@ router.get ("/users/rol/:id_rol?", async ( req , res ) => {
         if(isNaN(parseInt(id_rol))){
 
             return res.status(400).json({
-                message: `${ id_rol } no es valido, debe ser NUMERICO`,
+                message: `${ id_rol } NO ES VALIDO, TIENE QUE SER NUMERICO`,
                 code : -1
             });
 
@@ -41,7 +41,7 @@ router.get ("/users/rol/:id_rol?", async ( req , res ) => {
         if(usuarios){
 
             return res.status(200).json({
-            message: "Consulta exitosa por el id_rol",
+            message: "CONSULTA EXITOSA EN LA TABLA POR ID_ROL",
             code: 1,
             usuarios
 
@@ -55,7 +55,7 @@ router.get ("/users/rol/:id_rol?", async ( req , res ) => {
     }
 })
 
-router.get ("/users/:id_usuario?", async ( req , res ) => {
+router.get ("/:id_usuario?", async ( req , res ) => {
     try {
 
         const id_usuario = req.params.id_usuario;        
@@ -73,7 +73,7 @@ router.get ("/users/:id_usuario?", async ( req , res ) => {
         if(usuarios){
 
             return res.status(200).json({
-            message: "Consulta exitosa por el id_rol",
+            message: "CONSULTA EXITOSA EN LA TABLA POR ID_USUARIO",
             code : 1,
             usuarios
 
@@ -87,7 +87,7 @@ router.get ("/users/:id_usuario?", async ( req , res ) => {
     }
 })
 
-router.post ("/users/createUser", async ( req , res ) => {
+router.post ("/createUser", async ( req , res ) => {
     try {
         
         const { nombre , apellido , correo , num_cedula , pass_user , id_rol } = req.body;
@@ -125,7 +125,7 @@ router.post ("/users/createUser", async ( req , res ) => {
         if (campoVacio) {
             
             return res.status(400).json({
-                message : `No ingreso el campo ${campoVacio.nombre}`,
+                message : `NO INGRESO EL CAMPO : " ${campoVacio.nombre} "`,
                 code : -1
             });
         }
@@ -151,7 +151,7 @@ router.post ("/users/createUser", async ( req , res ) => {
     }
 })
 
-router.put ("/users/updateUser/:id_usuario?", async ( req , res) => {
+router.put ("/updateUser/:id_usuario?", async ( req , res) => {
     try {
         
         const { nombre , apellido , correo , num_cedula , pass_user , id_rol } = req.body;
@@ -189,7 +189,7 @@ router.put ("/users/updateUser/:id_usuario?", async ( req , res) => {
         if (campoVacio) {
             
             return res.status(404).json({
-                message : `No ingreso el campo ${campoVacio.nombre}`,
+                message : `NO INGRESO EL CAMPO : " ${campoVacio.nombre} "`,
                 code : -1
             });
         }
@@ -225,7 +225,7 @@ router.put ("/users/updateUser/:id_usuario?", async ( req , res) => {
     }
 })
 
-router.delete("/users/deleteUser/:id_usuario?", async ( req , res) => {
+router.delete("/deleteUser/:id_usuario?", async ( req , res) => {
     
     try {
 
