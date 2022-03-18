@@ -1,5 +1,97 @@
 const pool = require("../../database/dbConnection");
 
+/*
+TODO  CODIGOS DONDE EL CLIENTE TIENE PERMISO
+*/
+
+
+const getSearchAutor = async ( palabra_buscar ) => {
+    try {
+        const palabra = '%' + palabra_buscar + '%';
+        const buscarAutor = await pool.query(`SELECT * FROM f_search_autor ($1)`,[ palabra ]);  
+        if(JSON.stringify(buscarAutor.rows) === '[]') {
+            
+            buscarAutor = null; 
+                                   
+            return buscarAutor;
+
+        }else{
+            
+            return buscarAutor.rows;   
+        }   
+    } catch (error) {
+        
+        throw new error(`OCURRIO UN ERROR GRAVE EN LA BASE DE DATOS ${error}`);
+
+    }
+}
+
+const getSearchCalificacion = async ( palabra_buscar ) => {
+    try {
+        const palabra = '%' + palabra_buscar + '%';
+        const buscarCalificacion = await pool.query(`SELECT * FROM f_search_calificacion ($1)`,[ palabra ]);  
+        if(JSON.stringify(buscarCalificacion.rows) === '[]') {
+            
+            buscarCalificacion = null; 
+                                   
+            return buscarCalificacion;
+
+        }else{
+            
+            return buscarCalificacion.rows;   
+        }   
+    } catch (error) {
+        
+        throw new error(`OCURRIO UN ERROR GRAVE EN LA BASE DE DATOS ${error}`);
+
+    }
+}
+
+const getSearchFecha = async ( palabra_buscar ) => {
+    try {
+        
+        const buscarFecha = await pool.query(`SELECT * FROM f_search_fecha ($1)`,[ palabra_buscar ]);  
+        if(JSON.stringify(buscarFecha.rows) === '[]') {
+            
+            buscarFecha = null; 
+                                   
+            return buscarFecha;
+
+        }else{
+            
+            return buscarFecha.rows;   
+        }   
+    } catch (error) {
+        
+        throw new error(`OCURRIO UN ERROR GRAVE EN LA BASE DE DATOS ${error}`);
+
+    }
+}
+
+const getSearchEstrella = async ( palabra_buscar ) => {
+    try {
+        
+        const buscarEstrella = await pool.query(`SELECT * FROM f_search_estrella ($1)`,[ palabra_buscar ]);  
+        if(JSON.stringify(buscarEstrella.rows) === '[]') {
+            
+            buscarEstrella = null; 
+                                   
+            return buscarEstrella;
+
+        }else{
+            
+            return buscarEstrella.rows;   
+        }   
+    } catch (error) {
+        
+        throw new error(`OCURRIO UN ERROR GRAVE EN LA BASE DE DATOS ${error}`);
+
+    }
+}
+
+/*
+TODO  CODIGOS DONDE EL BIBLIOTECARIO TIENE PERMISO
+*/
 
 const getAllLibros = async ( ) => {
     try {
@@ -138,4 +230,5 @@ const deleteLibro = async ( id_libro ) => {
     }
 }
 
-module.exports = { getAllLibros,  getLibrosId , getLibrosAutor , getLibrosCalificacion , createLibro , updateLibro , deleteLibro};
+module.exports = { getAllLibros,  getLibrosId , getLibrosAutor , getLibrosCalificacion , createLibro , updateLibro , deleteLibro ,
+     getSearchAutor , getSearchCalificacion , getSearchFecha , getSearchEstrella };

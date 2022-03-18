@@ -1,6 +1,156 @@
 const express = require("express");
 const router = express.Router();
-const { getAllLibros , getLibrosId , getLibrosAutor , getLibrosCalificacion , createLibro , updateLibro , deleteLibro} = require("../controllers/libros.controller");
+const { getAllLibros , getLibrosId , getLibrosAutor , getLibrosCalificacion , createLibro , updateLibro , deleteLibro , getSearchAutor , getSearchCalificacion , getSearchFecha , getSearchEstrella} = require("../controllers/libros.controller");
+
+
+/*
+TODO  CODIGOS DONDE EL CLIENTE TIENE PERMISO
+*/
+
+
+router.get ("/buscar/autor/:palabra_buscar?", async ( req , res ) => {
+    try {
+
+        const palabra_buscar = req.params.palabra_buscar;        
+        if (palabra_buscar === undefined) {
+            return res.status(400).json({
+                message: "NO ENCONTRAMOS NINGUNA PALABRA O NUMERO EL EL BUSCADOR",
+                code : -1,
+                
+            })
+        }
+
+        const autores = await getSearchAutor( palabra_buscar );
+       
+
+        if(autores){
+
+            return res.status(200).json({
+            message: "CONSULTA EXITOSA EN LA TABLA PARA LOS AUTORES",
+            code : 1,
+            autores
+            })
+        }
+    } catch (error) {
+        
+        res.status(500).json({
+            message: "EL DATO NO EXISTE O OCURRIO UN ERROR CON LOS DATOS DE AUTORES",
+            code: -1
+        })        
+    }
+})
+
+router.get ("/buscar/calificacion/:palabra_buscar?", async ( req , res ) => {
+    try {
+
+        const palabra_buscar = req.params.palabra_buscar;        
+        if (palabra_buscar === undefined) {
+            return res.status(400).json({
+                message: "NO ENCONTRAMOS NINGUNA PALABRA O NUMERO EL EL BUSCADOR",
+                code : -1,
+                
+            })
+        }
+
+        const calificaciones = await getSearchCalificacion( palabra_buscar );
+       
+
+        if(calificaciones){
+
+            return res.status(200).json({
+            message: "CONSULTA EXITOSA EN LA TABLA PARA LAS CALIFICACIONES",
+            code : 1,
+            calificaciones
+            })
+        }
+    } catch (error) {
+        
+        res.status(500).json({
+            message: "EL DATO NO EXISTE O OCURRIO UN ERROR CON LOS DATOS DE CALIFICACIONES",
+            code: -1
+        })        
+    }
+})
+
+router.get ("/buscar/fecha/:palabra_buscar?", async ( req , res ) => {
+    try {
+
+        const palabra_buscar = req.params.palabra_buscar;        
+        if (palabra_buscar === undefined) {
+            return res.status(400).json({
+                message: "NO ENCONTRAMOS UNA FECHA PARA BUSCAR",
+                code : -1,
+                
+            })
+        }
+
+        const fecha_publicacion = await getSearchFecha( palabra_buscar );
+       
+
+        if(fecha_publicacion){
+
+            return res.status(200).json({
+            message: "CONSULTA EXITOSA EN LA TABLA PARA LAS FECHAS",
+            code : 1,
+            fecha_publicacion
+            })
+        }
+    } catch (error) {
+        
+        res.status(500).json({
+            message: "EL DATO NO EXISTE O OCURRIO UN ERROR CON LOS DATOS DE FECHAS",
+            code: -1
+        })        
+    }
+})
+
+router.get ("/buscar/estrellas/:palabra_buscar?", async ( req , res ) => {
+    try {
+
+        const palabra_buscar = req.params.palabra_buscar;        
+        if (palabra_buscar === undefined) {
+            return res.status(400).json({
+                message: "NO ENCONTRAMOS UN NUMERO DE ESTRELLAS, PORFAVOR COLOCAR UN PARAMETRO",
+                code : -1,
+                
+            })
+        }
+        if(isNaN(parseInt(palabra_buscar))){
+
+            return res.status(400).json({
+                message: `${ palabra_buscar } NO ES VALIDO, TIENE QUE SER NUMERICO`,
+                code : -1
+            });
+
+        } 
+
+        const estrellas = await getSearchEstrella(parseInt(palabra_buscar));
+       
+
+        if(estrellas){
+
+            return res.status(200).json({
+            message: "CONSULTA EXITOSA EN LA TABLA POR EL NUMERO DE ESTRELLAS",
+            code : 1,
+            estrellas
+            })
+        }
+    } catch (error) {
+        
+        res.status(500).json({
+            message: "EL DATO NO EXISTE O OCURRIO UN ERROR CON LOS DATOS DE ESTRELLAS",
+            code: -1
+        })        
+    }
+})
+
+
+
+
+
+/*
+TODO  CODIGOS DONDE EL BIBLIOTECARIO TIENE PERMISO
+*/
 
 router.get("/" , async ( req , res ) =>{
     try {
