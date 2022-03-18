@@ -79,7 +79,7 @@ const getLibrosCalificacion = async ( id_calificacion ) => {
     }
 }
 
-const createLibro = async ( req ) =>{
+const createLibro = async ( req ) => {
     try {
         
         const { titulo , id_autor , edicion , codigo_isbn , n_paginas , fecha_publicacion , id_calificacion } = req.body;              
@@ -119,9 +119,9 @@ const updateLibro = async ( req , id_libro ) => {
 
 const deleteLibro = async ( id_libro ) => {
     try {
-        console.log("aqui");
+        
         const libro = await pool.query(`SELECT * FROM f_delete_libro($1);`,[ id_libro ]);
-        console.log ("aqui");
+       
         if(JSON.stringify(libro.rows) === '[]') {
 
             libro = null;                                   

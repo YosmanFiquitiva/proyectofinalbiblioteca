@@ -21,16 +21,10 @@ const generarJwt = async (payload) =>{
 
 //Autorizacion del token enviado
 const verificarJwt = async ( token ) =>{
-    try {
+    
+    const payload = jwt.verify(token, "" + process.env.SECRETPRIVATEKEY);
 
-        const payload = jwt.verify(token, "" + process.env.SECRETPRIVATEKEY);
-        
-        return payload;
-        
-    } catch (error) {
-
-        throw new Error ( "ERROR AL GENERAR EL TOKEN " )
-    }
+    return payload;
     
 }
 

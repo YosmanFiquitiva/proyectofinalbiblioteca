@@ -33,10 +33,11 @@ router.post ('/', async ( req , res ) =>{
         if (userlogued) {
 
             const payload = {
+                id_usuario : userlogued.id_usuario,
                 nombre : userlogued.nombre,
                 apellido : userlogued.apellido,
                 correo : userlogued.correo,
-                rol : userlogued.id_rol
+                rol : userlogued.id_rol 
             }
             
             const token = await generarJwt(payload);

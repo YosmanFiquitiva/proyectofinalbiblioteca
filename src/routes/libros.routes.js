@@ -279,7 +279,7 @@ router.delete("/deleteLibro/:id_libro?", async ( req , res) => {
         } 
        
         const libros = await deleteLibro(id_libro);
-        console.log("hola");
+        
         if (libros) {
 
             return res.status(200).json({
