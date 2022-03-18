@@ -24,7 +24,7 @@ const verificarJwt = async ( token ) =>{
     try {
 
         const payload = jwt.verify(token, "" + process.env.SECRETPRIVATEKEY);
-
+        
         return payload;
         
     } catch (error) {
@@ -33,4 +33,17 @@ const verificarJwt = async ( token ) =>{
     }
     
 }
-module.exports = { generarJwt, verificarJwt };
+
+const decodeJwt = async ( token ) =>{
+    try {
+
+        const payload = jwt.decode(token);    
+        return payload;
+        
+    } catch (error) {
+
+        throw new Error ( "ERROR AL GENERAR EL TOKEN " )
+    }
+    
+}
+module.exports = { generarJwt, verificarJwt , decodeJwt};
