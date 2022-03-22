@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 const { getAllclasificacion , getclasificacionId } = require("../controllers/clasificacion.controller");
 
-
-
 router.get("/" , async ( req , res ) =>{
     try {
 

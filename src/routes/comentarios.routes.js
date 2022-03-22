@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const permissionClient = require("../utils/middlewareCliente");
 const { decodeJwt } = require("../utils/jwtAuth")
 const { getComentarioUser , createComentario , updateComentario , deleteComentario} = require("../controllers/comentarios.controller")
 

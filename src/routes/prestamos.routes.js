@@ -4,8 +4,9 @@ const { decodeJwt } = require("../utils/jwtAuth");
 const { createPrestamo, getPrestamoUser, deletePrestamo, updatePrestamo } = require("../controllers/prestamos.controller");
 const { SendEmail } = require("../utils/nodemailer");
 
+const cliente = require("../utils/middlewareCliente");
 
-router.get ("/misPrestamos", async ( req , res ) => {
+router.get ("/misPrestamos", cliente , async ( req , res ) => {
     try {
 
         const token = req.headers.authorization.split(' ').pop();
@@ -32,7 +33,7 @@ router.get ("/misPrestamos", async ( req , res ) => {
     }
 })
 
-router.post ("/createprestamo", async ( req , res ) => {
+router.post ("/createprestamo", cliente , async ( req , res ) => {
     try {
 
         const {  id_libro , des_prestamo } = req.body;
@@ -170,7 +171,7 @@ router.put ("/updateprestamo/:id_prestamo?", async ( req , res ) => {
     }
 })
 
-router.delete("/deleteprestamo/:id_prestamo?", async ( req , res) => {
+router.delete("/deleteprestamo/:id_prestamo?", cliente , async ( req , res) => {
     
     try {
 

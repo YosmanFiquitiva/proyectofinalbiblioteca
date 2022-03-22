@@ -2,13 +2,15 @@ const express = require("express");
 const router = express.Router();
 const { getAllLibros , getLibrosId , getLibrosAutor , getLibrosCalificacion , createLibro , updateLibro , deleteLibro , getSearchAutor , getSearchCalificacion , getSearchFecha , getSearchEstrella} = require("../controllers/libros.controller");
 
+const cliente = require("../utils/middlewareCliente");
+const biblio = require("../utils/middlewareBiblio");
 
 /*
 TODO  CODIGOS DONDE EL CLIENTE TIENE PERMISO
 */
 
 
-router.get ("/buscar/autor/:palabra_buscar?", async ( req , res ) => {
+router.get ("/buscar/autor/:palabra_buscar?", cliente , async ( req , res ) => {
     try {
 
         const palabra_buscar = req.params.palabra_buscar;        
@@ -40,7 +42,7 @@ router.get ("/buscar/autor/:palabra_buscar?", async ( req , res ) => {
     }
 })
 
-router.get ("/buscar/calificacion/:palabra_buscar?", async ( req , res ) => {
+router.get ("/buscar/calificacion/:palabra_buscar?", cliente , async ( req , res ) => {
     try {
 
         const palabra_buscar = req.params.palabra_buscar;        
@@ -72,7 +74,7 @@ router.get ("/buscar/calificacion/:palabra_buscar?", async ( req , res ) => {
     }
 })
 
-router.get ("/buscar/fecha/:palabra_buscar?", async ( req , res ) => {
+router.get ("/buscar/fecha/:palabra_buscar?", cliente , async ( req , res ) => {
     try {
 
         const palabra_buscar = req.params.palabra_buscar;        
@@ -104,7 +106,7 @@ router.get ("/buscar/fecha/:palabra_buscar?", async ( req , res ) => {
     }
 })
 
-router.get ("/buscar/estrellas/:palabra_buscar?", async ( req , res ) => {
+router.get ("/buscar/estrellas/:palabra_buscar?", cliente , async ( req , res ) => {
     try {
 
         const palabra_buscar = req.params.palabra_buscar;        
@@ -152,7 +154,7 @@ router.get ("/buscar/estrellas/:palabra_buscar?", async ( req , res ) => {
 TODO  CODIGOS DONDE EL BIBLIOTECARIO TIENE PERMISO
 */
 
-router.get("/" , async ( req , res ) =>{
+router.get("/" , biblio , async ( req , res ) =>{
     try {
 
         const libros = await getAllLibros();
@@ -171,7 +173,7 @@ router.get("/" , async ( req , res ) =>{
     }
 })
 
-router.get ("/:id_libro?", async ( req , res ) => {
+router.get ("/:id_libro?", biblio , async ( req , res ) => {
     try {
 
         const id_libro = req.params.id_libro;        
@@ -203,7 +205,7 @@ router.get ("/:id_libro?", async ( req , res ) => {
     }
 })
 
-router.get ("/autor/:id_autor?", async ( req , res ) => {
+router.get ("/autor/:id_autor?", biblio , async ( req , res ) => {
     try {
 
         const id_autor = req.params.id_autor;        
@@ -235,7 +237,7 @@ router.get ("/autor/:id_autor?", async ( req , res ) => {
     }
 })
 
-router.get ("/calificacion/:id_calificacion?", async ( req , res ) => {
+router.get ("/calificacion/:id_calificacion?", biblio , async ( req , res ) => {
     try {
        
         const id_calificacion = req.params.id_calificacion;        
@@ -268,7 +270,7 @@ router.get ("/calificacion/:id_calificacion?", async ( req , res ) => {
     }
 })
 
-router.post ("/createLibro", async ( req , res ) => {
+router.post ("/createLibro", biblio , async ( req , res ) => {
     try {
         
         const { titulo , id_autor , edicion , codigo_isbn , n_paginas , fecha_publicacion , id_calificacion } = req.body;
@@ -336,7 +338,7 @@ router.post ("/createLibro", async ( req , res ) => {
     }
 })
 
-router.put ("/updateLibro/:id_libro?", async ( req , res) => {
+router.put ("/updateLibro/:id_libro?", biblio , async ( req , res) => {
     try {
         
         const { titulo , id_autor , edicion , codigo_isbn , n_paginas , fecha_publicacion , id_calificacion } = req.body;
@@ -414,7 +416,7 @@ router.put ("/updateLibro/:id_libro?", async ( req , res) => {
     }
 })
 
-router.delete("/deleteLibro/:id_libro?", async ( req , res) => {
+router.delete("/deleteLibro/:id_libro?", biblio , async ( req , res) => {
     
     try {
 
