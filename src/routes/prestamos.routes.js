@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { decodeJwt } = require("../utils/jwtAuth");
 const { createPrestamo, getPrestamoUser, deletePrestamo, updatePrestamo } = require("../controllers/prestamos.controller");
+const { SendEmail } = require("../utils/nodemailer");
 
 
 router.get ("/misPrestamos", async ( req , res ) => {
@@ -146,13 +147,18 @@ router.put ("/updateprestamo/:id_prestamo?", async ( req , res ) => {
         
         const prestamos = await updatePrestamo ( req , id_prestamo , payload.id_usuario , payload.rol );
         
+        if (prestamos.pre_aprobado = true) {
+            
+            await SendEmail(payload.correo , prestamos.id_usuario , res);
+        }
+
         if (prestamos) {
 
             return res.status(200).json({
                 message: "EL PRESTAMO HA SIDO ACTUALIZADO CORRECTAMENTE",
                 code: 1,
                 prestamos
-            });
+            })
         }
         
     } catch (error) {
