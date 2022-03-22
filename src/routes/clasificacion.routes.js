@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getAllclasificacion , getclasificacionId} = require("../controllers/clasificacion.controller");
+const { getAllclasificacion , getclasificacionId } = require("../controllers/clasificacion.controller");
 
 
 

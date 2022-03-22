@@ -62,7 +62,7 @@ router.post ("/createComentario", async ( req , res ) => {
         }
         const token = req.headers.authorization.split(' ').pop();        
         const payload = await decodeJwt(token);         
-        console.log(payload);
+        
         const comentarios = await createComentario(req, payload.id_usuario);
         
         if(comentarios){

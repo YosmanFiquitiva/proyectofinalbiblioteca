@@ -30,8 +30,9 @@ const verificarJwt = async ( token ) =>{
 
 const decodeJwt = async ( token ) =>{
     try {
-
-        const payload = jwt.decode(token);    
+        
+        const payload = jwt.decode(token);  
+        
         return payload;
         
     } catch (error) {
