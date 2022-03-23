@@ -9,8 +9,8 @@ const SendEmail = async ( emailFrom , id_usuario )  => {
             host: 'smtp.ethereal.email',
             port: 587,
             auth: {
-                user: 'randi.kub24@ethereal.email',
-                pass: 'tr6T7TuPP5dkSdU4V5'
+                user: 'johnpaul.steuber29@ethereal.email',
+                pass: 'Rsur1wDWXRhnnqy3V9'
             }
         });
         const emailUser = await pool.query(`SELECT * FROM usu_pre WHERE usu_pre.id_usuario = $1;`,[id_usuario]);
