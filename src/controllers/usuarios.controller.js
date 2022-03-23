@@ -64,6 +64,7 @@ const createUser = async ( req ) =>{
         
         const { nombre , apellido , correo , num_cedula , pass_user , id_rol } = req.body;              
         const passwordHash = await bcrypt.hash(toString(pass_user) , 10 );
+        
         let usuarios = await pool.query(`SELECT * FROM f_create_usuario($1, $2, $3, $4, $5, $6);`,[ nombre , apellido , correo , num_cedula , passwordHash , id_rol ]);
         return usuarios;
 

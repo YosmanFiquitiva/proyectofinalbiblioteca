@@ -6,11 +6,11 @@ const SendEmail = async ( emailFrom , id_usuario )  => {
     try {
 
         const transporter = nodemailer.createTransport({
-            host: "smtp.ethereal.email",
+            host: 'smtp.ethereal.email',
             port: 587,
             auth: {
-                user: 'joshua.tremblay16@ethereal.email',
-                pass: 'AjccYHg6828qpG6hkq'
+                user: 'randi.kub24@ethereal.email',
+                pass: 'tr6T7TuPP5dkSdU4V5'
             }
         });
         const emailUser = await pool.query(`SELECT * FROM usu_pre WHERE usu_pre.id_usuario = $1;`,[id_usuario]);
@@ -121,7 +121,7 @@ const SendEmail = async ( emailFrom , id_usuario )  => {
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td align="center" class="esd-block-text" esd-links-color="#0b5394">
-                                                                                                <p>tenemos mas libros y contenido<br>en nuestra pagina<br><br><u><a target="_blank" style="color: #0b5394;">Leer Mas...</a></u></p>
+                                                                                                <p>ingresa para ver tus libros aceptados<br>en nuestra pagina<br><br><u><a target="_blank" style="color: #0b5394;">Leer Mas...</a></u></p>
                                                                                             </td>
                                                                                         </tr>
                                                                                     </tbody>
