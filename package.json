@@ -20,7 +20,7 @@
   "homepage": "https://gitlab.com/santiagofiquitiva/proyectofinalbiblioteca#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
-    "dotenv": "^16.0.0",
+    "dotenv": "^16.4.5",
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "nodemailer": "^6.7.3",
